@@ -1,12 +1,16 @@
 <template>
     <div class="clearAllContainer">
-		<span class="clearAllBtn">전체 삭제</span>
+		<span class="clearAllBtn" v-on:click="clearAllTodos">전체 삭제</span>
 	</div>
 </template>
 
 <script>
 export default {
-
+    methods:{
+        clearAllTodos(){
+            this.$emit('clearAllTodos')
+        }
+    }
 }
 </script>
 

@@ -1,12 +1,22 @@
 <template>
   <div>
-    
+    <transition-group name="list" tag="ul">
+      <li v-for="(todo) in this.propsdata" v-bind:key="todo">
+        <input type="checkbox" >
+        <span>{{todo.todoItem}}</span>
+        <span class="removeBtn" >
+					<i class="fas fa-trash-alt">삭제</i>
+				</span>
+      </li>
+    </transition-group>
   </div>
 </template>
 
 <script>
 export default {
-
+   
+    props : ['propsdata'],
+    
 }
 </script>
 

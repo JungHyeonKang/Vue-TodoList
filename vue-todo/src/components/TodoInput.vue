@@ -1,12 +1,50 @@
 <template>
   <div class="inputBox shadow">
-    <input type="text">
+    <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+    <span class="addContainer" v-on:click="addTodo">			
+			<i class="fa-regular fa-plus addBtn">+</i>
+    </span>
+
+    <CustomModal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">
+        경고!
+         <i class="closeModalBtn fa fa-times" 
+          aria-hidden="true" 
+          @click="showModal = false">
+          닫기
+        </i>
+      </h3>
+      <p slot="body">할 일을 입력하세요.</p>
+    </CustomModal>
   </div>
 </template>
 
 <script>
+import CustomModal from './CustomModal.vue'
 export default {
-
+    data(){
+        return{
+            newTodo : "",
+            showModal : false
+        }
+    },
+    methods:{
+        addTodo(){
+            if(this.newTodo !== ''){
+                this.$emit('saveTodo' , this.newTodo);
+                this.clearInput();
+            }else{
+                this.showModal = !this.showModal
+            }
+          
+        },
+        clearInput(){
+            this.newTodo = ""
+        }
+    },
+    components:{
+        CustomModal
+    }
 }
 </script>
 
