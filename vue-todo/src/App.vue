@@ -1,13 +1,24 @@
 <template>
   <div id="app">
-    hello
+    <TodoHeader></TodoHeader>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
+    <TodoClearButton></TodoClearButton>
   </div>
 </template>
 
 <script>
-
+import TodoHeader from './components/TodoHeader.vue'
+import TodoInput from './components/TodoInput.vue'
+import TodoList from './components/TodoList.vue'
+import TodoClearButton from './components/TodoClearButton.vue'
 export default {
- 
+  components:{
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoClearButton
+  }
 }
 </script>
 
