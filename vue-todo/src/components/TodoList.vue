@@ -1,12 +1,12 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todo) in this.propsdata" v-bind:key="todo">
-        <input type="checkbox" >
+      <li v-for="(todo , index) in this.propsdata" v-bind:key="index" class="shadow">
+        <input type="checkbox" @click="checkTodo(todo)" v-bind:class="{checkBtnCompleted : todo.completed}">
         <span>{{todo.todoItem}}</span>
-        <span class="removeBtn" >
-					<i class="fas fa-trash-alt">삭제</i>
-				</span>
+        <span class="removeBtn"  @click="removeTodo(todo , index)">
+            <i class="fas fa-trash-alt">삭제</i>
+        </span>
       </li>
     </transition-group>
   </div>
@@ -16,11 +16,19 @@
 export default {
    
     props : ['propsdata'],
-    
+    methods:{
+        checkTodo(todo,index){
+           
+            this.$emit('checkTodo' ,todo,index)
+        },
+        removeTodo(todo , index){
+            this.$emit('removeTodo' , todo , index)
+        }
+    }
 }
 </script>
 
-<style>
+<style scope>
 ul {
 	list-style-type: none;
 	padding-left: 0px;

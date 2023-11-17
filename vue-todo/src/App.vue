@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:saveTodo="saveTodo"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems"></TodoList>
+    <TodoList v-bind:propsdata="todoItems" v-on:checkTodo='checkTodo' v-on:removeTodo='removeTodo'></TodoList>
     <TodoClearButton v-on:clearAllTodos="clearAllTodos"></TodoClearButton>
   </div>
 </template>
@@ -34,6 +34,15 @@ export default {
     clearAllTodos(){
       localStorage.clear();
       this.todoItems=[];
+    },
+    checkTodo(todo){
+       todo.completed = !todo.completed
+        localStorage.removeItem(todo.todoItem)
+       localStorage.setItem(todo.todoItem,JSON.stringify(todo))
+    },
+    removeTodo(todo , index){
+       localStorage.removeItem(todo.todoItem)
+       this.todoItems.splice(index , 1)
     }
   },
   created() {
