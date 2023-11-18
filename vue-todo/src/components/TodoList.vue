@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todo , index) in this.propsdata" v-bind:key="index" class="shadow">
+      <li v-for="(todo , index) in todoList" v-bind:key="index" class="shadow">
         <input type="checkbox" @click="checkTodo(todo)" v-bind:class="{checkBtnCompleted : todo.completed}">
         <span>{{todo.todoItem}}</span>
         <span class="removeBtn"  @click="removeTodo(todo , index)">
@@ -13,9 +13,9 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
    
-    props : ['propsdata'],
     methods:{
         checkTodo(todo,index){
            
@@ -24,6 +24,9 @@ export default {
         removeTodo(todo , index){
             this.$emit('removeTodo' , todo , index)
         }
+    },
+    computed:{
+      ...mapGetters(['todoList'])
     }
 }
 </script>

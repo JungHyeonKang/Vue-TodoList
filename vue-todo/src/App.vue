@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput v-on:saveTodo="saveTodo"></TodoInput>
-    <TodoList v-bind:propsdata="todoItems" v-on:checkTodo='checkTodo' v-on:removeTodo='removeTodo'></TodoList>
+    <TodoList v-on:checkTodo='checkTodo' v-on:removeTodo='removeTodo'></TodoList>
     <TodoClearButton v-on:clearAllTodos="clearAllTodos"></TodoClearButton>
   </div>
 </template>
@@ -45,12 +45,6 @@ export default {
        this.todoItems.splice(index , 1)
     }
   },
-  created() {
-    for(let i =0 ; i< localStorage.length;i++){
-      this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i)))) 
-    }
-
-  }
 }
 </script>
 
