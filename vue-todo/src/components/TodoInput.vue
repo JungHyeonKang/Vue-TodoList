@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import CustomModal from './CustomModal.vue'
 export default {
     data(){
@@ -31,7 +32,7 @@ export default {
     methods:{
         addTodo(){
             if(this.newTodo !== ''){
-                this.$emit('saveTodo' , this.newTodo);
+                this.saveTodo(this.newTodo)
                 this.clearInput();
             }else{
                 this.showModal = !this.showModal
@@ -40,7 +41,8 @@ export default {
         },
         clearInput(){
             this.newTodo = ""
-        }
+        },
+        ...mapMutations(['saveTodo'])
     },
     components:{
         CustomModal

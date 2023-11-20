@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:saveTodo="saveTodo"></TodoInput>
-    <TodoList v-on:checkTodo='checkTodo' v-on:removeTodo='removeTodo'></TodoList>
-    <TodoClearButton v-on:clearAllTodos="clearAllTodos"></TodoClearButton>
+    <TodoInput></TodoInput>
+    <TodoList ></TodoList>
+    <TodoClearButton ></TodoClearButton>
   </div>
 </template>
 
@@ -12,39 +12,14 @@ import TodoHeader from './components/TodoHeader.vue'
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
 import TodoClearButton from './components/TodoClearButton.vue'
+
 export default {
   components:{
     TodoHeader,
     TodoInput,
     TodoList,
     TodoClearButton
-  },
-  data(){
-    return {
-      todoItems : []
-    }
-  },
-  methods:{
-    saveTodo(todoItem){
-    
-      let obj = {completed : false, todoItem : todoItem }
-      localStorage.setItem(todoItem,JSON.stringify(obj))
-      this.todoItems.push(obj)
-    },
-    clearAllTodos(){
-      localStorage.clear();
-      this.todoItems=[];
-    },
-    checkTodo(todo){
-       todo.completed = !todo.completed
-        localStorage.removeItem(todo.todoItem)
-       localStorage.setItem(todo.todoItem,JSON.stringify(todo))
-    },
-    removeTodo(todo , index){
-       localStorage.removeItem(todo.todoItem)
-       this.todoItems.splice(index , 1)
-    }
-  },
+  }
 }
 </script>
 

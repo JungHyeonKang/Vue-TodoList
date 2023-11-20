@@ -2,9 +2,9 @@
   <div>
     <transition-group name="list" tag="ul">
       <li v-for="(todo , index) in todoList" v-bind:key="index" class="shadow">
-        <input type="checkbox" @click="checkTodo(todo)" v-bind:class="{checkBtnCompleted : todo.completed}">
+        <input type="checkbox" @click="checkTodo({ todo, index})" v-bind:class="{checkBtnCompleted : todo.completed}">
         <span>{{todo.todoItem}}</span>
-        <span class="removeBtn"  @click="removeTodo(todo , index)">
+        <span class="removeBtn"  @click="removeTodo({todo , index})">
             <i class="fas fa-trash-alt">삭제</i>
         </span>
       </li>
@@ -13,21 +13,15 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapMutations} from 'vuex'
+
 export default {
-   
     methods:{
-        checkTodo(todo,index){
-           
-            this.$emit('checkTodo' ,todo,index)
-        },
-        removeTodo(todo , index){
-            this.$emit('removeTodo' , todo , index)
-        }
+      ...mapMutations(['checkTodo','removeTodo']),
     },
     computed:{
       ...mapGetters(['todoList'])
-    }
+    },
 }
 </script>
 

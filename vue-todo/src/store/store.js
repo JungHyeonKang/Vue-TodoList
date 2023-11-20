@@ -18,12 +18,29 @@ export const store = new Vuex.Store({
     todoItems : todoStorage.fetch()
    },
    getters:{
-        todoList(state){
-            return state.todoItems;
-        }
+    todoList(state){
+        return state.todoItems;
+    }
    },
-   mutations:{
-
+   mutations:{ // 항상 state 포함
+    saveTodo(state,todoItem){
+        let obj = {completed : false, todoItem : todoItem }
+        localStorage.setItem(todoItem,JSON.stringify(obj))
+        state.todoItems.push(obj)
+    },
+    clearAllTodos(state){
+        localStorage.clear();
+        state.todoItems=[];
+    },
+    checkTodo(state ,payload){
+        state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed
+        localStorage.removeItem(payload.todo.todoItem)
+        localStorage.setItem(payload.todo.todoItem,JSON.stringify(payload.todo))
+    },
+    removeTodo(state,payload){
+        localStorage.removeItem(payload.todo.todoItem)
+        state.todoItems.splice(payload.index , 1)
+    }
    },
 
 })  
